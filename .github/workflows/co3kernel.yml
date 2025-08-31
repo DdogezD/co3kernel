@@ -39,7 +39,7 @@ on:
           - 'N'
         default: 'Y'
       BBR_ALGORITHM:
-        description: "是否使 bbr 算法可用"
+        description: "使 bbr 算法可用"
         required: true
         type: choice
         options:
