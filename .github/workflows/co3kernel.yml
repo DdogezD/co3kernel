@@ -33,18 +33,27 @@ on:
       TMPFS_XATTR:
         description: "覆写 tmpfs 支持扩展属性"
         required: true
-        type: boolean
-        default: true
+        type: choice
+        options:
+          - 'Y'
+          - 'N'
+        default: 'Y'
       BBR_ALGORITHM:
-        description: "使 bbr 算法可用"
+        description: "是否使 bbr 算法可用"
         required: true
-        type: boolean
-        default: true
+        type: choice
+        options:
+          - 'Y'
+          - 'N'
+        default: 'Y'
       KPM:
-        description: "启用SukiSU KPM"
+        description: "启用 SukiSU KPM"
         required: true
-        type: boolean
-        default: true
+        type: choice
+        options:
+          - 'Y'
+          - 'N'
+        default: 'Y'
 
 jobs:
   build:
@@ -119,10 +128,10 @@ jobs:
         run: |
           cd kernel_workspace/kernel_platform
           echo "CONFIG_KSU_KPROBES_HOOK=n" >> ./common/arch/arm64/configs/gki_defconfig
-          if [ "${{ github.event.inputs.TMPFS_XATTR == 'true' }} ]; then
+          if [ "${{ github.event.inputs.TMPFS_XATTR }}" == "Y" ]; then
             echo "CONFIG_TMPFS_XATTR=y" >> ./common/arch/arm64/configs/gki_defconfig
           fi
-          if [ "${{ github.event.inputs.BBR_ALGORITHM == 'true' }} ]; then
+          if [ "${{ github.event.inputs.BBR_ALGORITHM }}" == "Y" ]; then
             echo "CONFIG_TCP_CONG_ADVANCED=y" >> ./common/arch/arm64/configs/gki_defconfig
             echo "CONFIG_TCP_CONG_BBR=y" >> ./common/arch/arm64/configs/gki_defconfig
             echo "CONFIG_NET_SCH_FQ=y" >> ./common/arch/arm64/configs/gki_defconfig
@@ -130,7 +139,7 @@ jobs:
             echo "CONFIG_TCP_CONG_WESTWOOD=n" >> ./common/arch/arm64/configs/gki_defconfig
             echo "CONFIG_TCP_CONG_HTCP=n" >> ./common/arch/arm64/configs/gki_defconfig
           fi
-          if [ "${{ github.event.inputs.KPM == 'true' }} ]; then
+          if [ "${{ github.event.inputs.KPM }}" == "Y" ]; then
             echo "CONFIG_KALLSYMS=y" >> ./common/arch/arm64/configs/gki_defconfig
           fi
           sed -i 's/check_defconfig//' ./common/build.config.gki
@@ -147,7 +156,7 @@ jobs:
           LTO=thin ./kernel_platform/oplus/build/oplus_build_kernel.sh ${{ github.event.inputs.CPUD }} gki
 
       - name: Intergate SukiSU KPM
-        if: ${{ github.event.inputs.KPM == 'true' }}
+        if: ${{ github.event.inputs.KPM == 'Y' }}
         run: |
           cd kernel_workspace/kernel_platform/out/msm-kernel-${{ github.event.inputs.CPUD }}-gki/dist/
           curl -LSs "https://raw.githubusercontent.com/DdogezD/SukiSU_patch/refs/heads/main/kpm/patch_linux" -o patch_linux
