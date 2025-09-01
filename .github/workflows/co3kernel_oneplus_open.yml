@@ -138,7 +138,7 @@ jobs:
           cp -r ../../kernelpatches/zram/lz4/* ./lib/lz4/
           cp -r ../../kernelpatches/zram/include/linux/* ./include/linux/
           cp ../../kernelpatches/zram/5.15/lz4_1.10.0.patch ./
-          patch -p1 -F 3 --fuzz=5 < lz4_1.10.0.patch || true
+          patch -p1 < lz4_1.10.0.patch || true
 
       - name: Spoof Linux version
         run: |
