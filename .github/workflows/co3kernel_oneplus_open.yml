@@ -116,8 +116,6 @@ jobs:
             echo 'CONFIG_TCP_CONG_BIC=n' >> ./common/arch/arm64/configs/gki_defconfig
             sed -i '/^CONFIG_TCP_CONG_WESTWOOD=/d' ./common/arch/arm64/configs/gki_defconfig
             echo 'CONFIG_TCP_CONG_WESTWOOD=n' >> ./common/arch/arm64/configs/gki_defconfig
-            sed -i '/^CONFIG_DEFAULT_TCP_CONG=/d' ./common/arch/arm64/configs/gki_defconfig
-            echo 'CONFIG_DEFAULT_TCP_CONG="bbr"' >> ./common/arch/arm64/configs/gki_defconfig
           fi
           sed -i 's/check_defconfig//' ./common/build.config.gki
 
