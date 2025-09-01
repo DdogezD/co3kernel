@@ -5,9 +5,7 @@
 含有以下特性：
 - 使用 manual scope-minimized hooks 的 KernelSU Next。
 
-- 支持 CONFIG_TMPFS_XATTR 特性,可以使用 mountify 完成模块挂载。
-  - 使用方法：启用 Magic_Mount，然后安装Mountify。
-  - 配置完成后，在 "/data/adb/ksu/" 下创建 ".notmpfs" 和 ".nomount" 文件。
+- 支持 CONFIG_TMPFS_XATTR 特性,可以使用 [Mountify](https://github.com/backslashxx/mountify) 完成模块挂载。
 
 - 可选支持 BBR 网络拥塞算法。
 
