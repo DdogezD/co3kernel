@@ -26,6 +26,10 @@ on:
         description: "自定义 Linux version 字符串"
         required: true
         default: '-android13-8-o-01129-g2e2297c38782'
+      KERNEL_BUILD_TIME:
+        description: "自定义构建时间"
+        required: true
+        default: 'Tue Apr 22 09:01:10 UTC 2025'
       KERNEL_VER:
         description: "自定义 KernelSU 版本号"
         required: true
@@ -40,14 +44,6 @@ on:
         default: 'Y'
       BBR_ALGORITHM:
         description: "使 bbr 算法可用"
-        required: true
-        type: choice
-        options:
-          - 'Y'
-          - 'N'
-        default: 'Y'
-      KPM:
-        description: "启用 SukiSU KPM"
         required: true
         type: choice
         options:
@@ -112,7 +108,7 @@ jobs:
       - name: Add KernelSU Next
         run: |
           cd kernel_workspace/kernel_platform
-          curl -LSs "https://raw.githubusercontent.com/DdogezD/KernelSU-Next-kpm2main/next/kernel/setup.sh" | bash -s next
+          curl -LSs "https://raw.githubusercontent.com/DdogezD/KernelSU-Next/next/kernel/setup.sh" | bash -s next
           cd ./KernelSU-Next
           MAKE_FILE="kernel/Makefile"
           DEFAULT_VERSION=11998
@@ -139,9 +135,6 @@ jobs:
             echo "CONFIG_TCP_CONG_WESTWOOD=n" >> ./common/arch/arm64/configs/gki_defconfig
             echo "CONFIG_TCP_CONG_HTCP=n" >> ./common/arch/arm64/configs/gki_defconfig
           fi
-          if [ "${{ github.event.inputs.KPM }}" == "Y" ]; then
-            echo "CONFIG_KALLSYMS=y" >> ./common/arch/arm64/configs/gki_defconfig
-          fi
           sed -i 's/check_defconfig//' ./common/build.config.gki
 
       - name: Spoof Linux version
@@ -153,16 +146,8 @@ jobs:
       - name: Build kernel
         run: |
           cd kernel_workspace
+          export KBUILD_BUILD_TIMESTAMP="${{ github.event.inputs.KERNEL_BUILD_TIME }}"
           LTO=thin ./kernel_platform/oplus/build/oplus_build_kernel.sh ${{ github.event.inputs.CPUD }} gki
-
-      - name: Intergate SukiSU KPM
-        if: ${{ github.event.inputs.KPM == 'Y' }}
-        run: |
-          cd kernel_workspace/kernel_platform/out/msm-kernel-${{ github.event.inputs.CPUD }}-gki/dist/
-          curl -LSs "https://raw.githubusercontent.com/DdogezD/SukiSU_patch/refs/heads/main/kpm/patch_linux" -o patch_linux
-          chmod +x patch_linux
-          ./patch_linux
-          cp oImage $GITHUB_WORKSPACE/kernel_workspace/kernel
 
       - name: Upload image
         uses: actions/upload-artifact@v4
