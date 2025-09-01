@@ -147,7 +147,7 @@ jobs:
         run: |
           cd kernel_workspace
           export KBUILD_BUILD_TIMESTAMP="${{ github.event.inputs.KERNEL_BUILD_TIME }}"
-          LTO=thin ./kernel_platform/oplus/build/oplus_build_kernel.sh ${{ github.event.inputs.CPUD }} gki
+          env KBUILD_BUILD_TIMESTAMP="$KBUILD_BUILD_TIMESTAMP" LTO=thin ./kernel_platform/oplus/build/oplus_build_kernel.sh ${{ github.event.inputs.CPUD }} gki
 
       - name: Prepare Kernel
         run: |
