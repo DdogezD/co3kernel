@@ -26,10 +26,6 @@ on:
         description: "自定义 Linux version 字符串"
         required: true
         default: '-android13-8-o-01129-g2e2297c38782'
-      KERNEL_BUILD_TIME:
-        description: "自定义构建时间"
-        required: true
-        default: 'Tue Apr 22 09:01:10 UTC 2025'
       KERNEL_VER:
         description: "自定义 KernelSU 版本号"
         required: true
@@ -118,7 +114,6 @@ jobs:
             KSU_VERSION="$KERNEL_VER"
           fi
           sed -i "s/^DKSU_VERSION.*/DKSU_VERSION=${KSU_VERSION}/" "${MAKE_FILE}"
-          echo "KSUVER=${KSU_VERSION}" >> $GITHUB_ENV
 
       - name: Add configuration settings
         run: |
@@ -146,8 +141,7 @@ jobs:
       - name: Build kernel
         run: |
           cd kernel_workspace
-          export KBUILD_BUILD_TIMESTAMP="${{ github.event.inputs.KERNEL_BUILD_TIME }}"
-          env KBUILD_BUILD_TIMESTAMP="$KBUILD_BUILD_TIMESTAMP" LTO=thin ./kernel_platform/oplus/build/oplus_build_kernel.sh ${{ github.event.inputs.CPUD }} gki
+          LTO=thin ./kernel_platform/oplus/build/oplus_build_kernel.sh ${{ github.event.inputs.CPUD }} gki
 
       - name: Prepare Kernel
         run: |
@@ -156,5 +150,5 @@ jobs:
       - name: Upload Image
         uses: actions/upload-artifact@v4
         with:
-         name: co3kernel_${{ env.KSUVER }}_${{ github.event.inputs.FEIL }}
+         name: co3kernel
          path: kernel_workspace/kernel
