@@ -81,7 +81,7 @@ jobs:
           eval $(opam env)
           ./apply.sh ../../kernel_platform/common
 
-      - name: Add KernelSU Next
+      - name: Add KernelSU Next (Release)
         run: |
           cd kernel_workspace/kernel_platform
           curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -
@@ -120,6 +120,27 @@ jobs:
             echo 'CONFIG_DEFAULT_TCP_CONG="bbr"' >> ./common/arch/arm64/configs/gki_defconfig
           fi
           sed -i 's/check_defconfig//' ./common/build.config.gki
+
+      - name: Upgrade LZ4 to 1.10.0
+        run: |
+          cd kernel_workspace
+          git clone https://github.com/DdogezD/kernelpatches.git
+          cd kernel_workspace/kernel_platform/common
+          files=(
+              "lib/lz4/lz4_compress.c"
+              "lib/lz4/lz4_decompress.c"
+              "lib/lz4/lz4defs.h"
+              "lib/lz4/lz4hc_compress.c"
+          )
+          for file in "${files[@]}"; do
+              if [ -e "$file" ]; then
+                  rm "$file"
+              fi
+          done
+          cp -r ../../kernelpatches/zram/lz4/* ./lib/lz4/
+          cp -r ../../kernelpatches/zram/include/linux/* ./include/linux/
+          cp -r ../../kernelpatches/zram/5.15/lz4_1.10.0.patch ./
+          patch -p1 -F 3 --fuzz=5 < lz4_1.10.0.patch || true
 
       - name: Spoof Linux version
         run: |
