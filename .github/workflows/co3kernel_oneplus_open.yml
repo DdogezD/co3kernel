@@ -1,4 +1,4 @@
-name: co3kernel_build
+name: co3kernel_build_OnePlusOpen_Only
 on:
   workflow_dispatch:
     inputs:
