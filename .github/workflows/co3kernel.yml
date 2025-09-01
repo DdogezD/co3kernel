@@ -130,6 +130,8 @@ jobs:
             echo 'CONFIG_TCP_CONG_BBR=y' >> ./common/arch/arm64/configs/gki_defconfig
             sed -i '/^CONFIG_NET_SCH_FQ=/d' ./common/arch/arm64/configs/gki_defconfig
             echo 'CONFIG_NET_SCH_FQ=y' >> ./common/arch/arm64/configs/gki_defconfig
+            sed -i '/^CONFIG_TCP_CONG_HTCP=/d' ./common/arch/arm64/configs/gki_defconfig
+            echo 'CONFIG_TCP_CONG_HTCP=n' >> ./common/arch/arm64/configs/gki_defconfig
             sed -i '/^CONFIG_TCP_CONG_BIC=/d' ./common/arch/arm64/configs/gki_defconfig
             echo 'CONFIG_TCP_CONG_BIC=n' >> ./common/arch/arm64/configs/gki_defconfig
             sed -i '/^CONFIG_TCP_CONG_WESTWOOD=/d' ./common/arch/arm64/configs/gki_defconfig
