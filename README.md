@@ -6,7 +6,7 @@
 - **使用手动最小作用域 hooks 的 KernelSU Next:** 确保 KernelSU 性能开销最小化。
 - **可选支持 tmpfs 扩展属性:** 可使用 [Mountify](https://github.com/backslashxx/mountify) 完成模块挂载。
 - **可选支持 bbr 网络拥塞算法**。
-- **内建 LZ4_latest 算法可选**。
+- **LZ4升级到1.10.0**。
 - **默认伪装为最新 OnePlus Open (NA) 内核 Linux 版本。**
 
 ## 致谢
