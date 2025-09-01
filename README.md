@@ -1,5 +1,5 @@
 
-# **CO³ — Custom OnePlus Open Kernel OKI**
+# **CO³ — Custom OnePlus Open OKI**
 
 这是为 **Hedwig (OnePlus Open)** 编译的内核，包含以下特性：
 
