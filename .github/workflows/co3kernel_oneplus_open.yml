@@ -125,7 +125,7 @@ jobs:
         run: |
           cd kernel_workspace
           git clone https://github.com/DdogezD/kernelpatches.git
-          cd kernel_workspace/kernel_platform/common
+          cd kernel_platform/common
           files=(
               "lib/lz4/lz4_compress.c"
               "lib/lz4/lz4_decompress.c"
@@ -139,7 +139,7 @@ jobs:
           done
           cp -r ../../kernelpatches/zram/lz4/* ./lib/lz4/
           cp -r ../../kernelpatches/zram/include/linux/* ./include/linux/
-          cp -r ../../kernelpatches/zram/5.15/lz4_1.10.0.patch ./
+          cp ../../kernelpatches/zram/5.15/lz4_1.10.0.patch ./
           patch -p1 -F 3 --fuzz=5 < lz4_1.10.0.patch || true
 
       - name: Spoof Linux version
