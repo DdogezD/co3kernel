@@ -95,6 +95,10 @@ jobs:
           tar -xzf ../../co3kernel/zram/zram_linux_include.tar.gz -C ./include/linux --strip-components=1 include/linux
           cp ../../co3kernel/zram/lz4_1.10.0.patch ./
           patch -p1 < lz4_1.10.0.patch || true
+          echo "===== debug lz4 list"
+          find lib/lz4 -type f | sort
+          echo "===== debug linux list"
+          find include/linux -type f | grep lz4 | sort
 
       - name: Add KernelSU Next (Release)
         run: |
