@@ -97,7 +97,7 @@ jobs:
       - name: prepare reject file
         run: |
           cp kernel_workspace/kernel_platform/common/fs/f2fs/compress.c ./kernel_workspace/kernel
-          cp kernel_workspace/ernel_platform/common/fs/f2fs/compress.c.rej ./kernel_workspace/kernel
+          cp kernel_workspace/kernel_platform/common/fs/f2fs/compress.c.rej ./kernel_workspace/kernel
 
       - name: Upload reject file
         uses: actions/upload-artifact@v4
