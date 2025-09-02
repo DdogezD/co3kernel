@@ -18,8 +18,8 @@ on:
           - 'Y'
           - 'N'
         default: 'Y'
-      BBR_ALGORITHM:
-        description: "tcp 默认使用 bbr 算法"
+      TCP_ALGORITHM:
+        description: "tcp 算法增强"
         required: true
         type: choice
         options:
@@ -73,7 +73,15 @@ jobs:
           sed -i 's/ -dirty//g' kernel_platform/common/scripts/setlocalversion
           sed -i 's/ -dirty//g' kernel_platform/msm-kernel/scripts/setlocalversion
 
-      - name: Upgrade LZ4 to 1.10.0
+      - name: Patch kernel by Coccinelle
+        run: |
+          cd kernel_workspace
+          git clone https://github.com/DdogezD/kernelsu-coccinelle
+          cd kernelsu-coccinelle/scope-minimized-hooks
+          eval $(opam env)
+          ./apply.sh ../../kernel_platform/common
+
+      - name: Upgrade LZ4
         run: |
           cd kernel_workspace
           git clone https://github.com/DdogezD/co3kernel.git
@@ -87,14 +95,6 @@ jobs:
           cp -r ../../co3kernel/zram/include/linux/* ./include/linux/
           cp ../../co3kernel/zram/lz4_1.10.0.patch ./
           patch -p1 < lz4_1.10.0.patch || true
-
-      - name: Patch kernel by Coccinelle
-        run: |
-          cd kernel_workspace
-          git clone https://github.com/DdogezD/kernelsu-coccinelle
-          cd kernelsu-coccinelle/scope-minimized-hooks
-          eval $(opam env)
-          ./apply.sh ../../kernel_platform/common
 
       - name: Add KernelSU Next (Release)
         run: |
@@ -118,7 +118,7 @@ jobs:
             sed -i '/^CONFIG_TMPFS_XATTR=/d' ./common/arch/arm64/configs/gki_defconfig
             echo 'CONFIG_TMPFS_XATTR=y' >> ./common/arch/arm64/configs/gki_defconfig
           fi
-          if [ "${{ github.event.inputs.BBR_ALGORITHM }}" == "Y" ]; then
+          if [ "${{ github.event.inputs.TCP_ALGORITHM }}" == "Y" ]; then
             sed -i '/^CONFIG_TCP_CONG_ADVANCED=/d' ./common/arch/arm64/configs/gki_defconfig
             echo 'CONFIG_TCP_CONG_ADVANCED=y' >> ./common/arch/arm64/configs/gki_defconfig
             sed -i '/^CONFIG_TCP_CONG_BBR=/d' ./common/arch/arm64/configs/gki_defconfig
