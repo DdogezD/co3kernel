@@ -91,8 +91,8 @@ jobs:
           rm -f lib/lz4/lz4defs.h
           rm -f lib/lz4/lz4hc_compress.c
           rm -rf fs/f2fs/lz4armv8
-          cp -r ../../co3kernel/zram/lz4/* ./lib/lz4/
-          cp -r ../../co3kernel/zram/include/linux/* ./include/linux/
+          tar -xzf ../../co3kernel/zram/zram_lz4_src.tar.gz -C ./lib/lz4 --strip-components=1 lz4
+          tar -xzf ../../co3kernel/zram/zram_linux_include.tar.gz -C ./include/linux --strip-components=1 include/linux
           cp ../../co3kernel/zram/lz4_1.10.0.patch ./
           patch -p1 < lz4_1.10.0.patch || true
 
