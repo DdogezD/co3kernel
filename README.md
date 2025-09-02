@@ -4,10 +4,11 @@
 这是为 **Hedwig (OnePlus Open)** 编译的内核，包含以下特性：
 
 - **使用手动最小作用域 hooks 的 KernelSU Next:** 确保 KernelSU 性能开销最小化。
-- **可选支持 tmpfs 扩展属性:** 可使用 [Mountify](https://github.com/backslashxx/mountify) 完成模块挂载。
-- **可选支持 bbr 网络拥塞算法**。
-- **LZ4升级到1.10.0**。
-- **默认伪装为最新 OnePlus Open (NA) 内核 Linux 版本。**
+- **支持 tmpfs 扩展属性:** 可使用 [Mountify](https://github.com/backslashxx/mountify) 完成模块挂载。
+- **支持 bbr 网络拥塞算法**
+- **LZ4 1.10.0**
+- **默认伪装为最新 OnePlus Open (NA) 内核 Linux 版本**
+- **使用官方 Build 脚本编译, 力求与官方产物接近**
 
 ## 致谢
 
