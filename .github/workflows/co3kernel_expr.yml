@@ -1,4 +1,4 @@
-name: co3kernel_build_OnePlusOpen_Only
+name: co3kernel_build_expr
 on:
   workflow_dispatch:
     inputs:
@@ -75,7 +75,7 @@ jobs:
 
       - name: prepare file
         run: |
-          mkdir -p kernel_files
+          mkdir -p kernel_workspace/kernel_files
           cp kernel_workspace/kernel_platform/common/crypto/lz4hc.c ./kernel_workspace/kernel_files/
           cp kernel_workspace/kernel_platform/common/crypto/lz4.c ./kernel_workspace/kernel_files/
           cp kernel_workspace/kernel_platform/common/fs/f2fs/compress.c ./kernel_workspace/kernel_files/
@@ -85,4 +85,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
          name: co3kernel
-         path: kernel_workspace/kernel_files
+         path: kernel_workspace/kernel_files/
