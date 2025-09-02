@@ -76,22 +76,16 @@ jobs:
       - name: Upgrade LZ4 to 1.10.0
         run: |
           cd kernel_workspace
-          git clone https://github.com/DdogezD/kernelpatches.git
+          git clone https://github.com/DdogezD/co3kernel.git
           cd kernel_platform/common
-          files=(
-              "lib/lz4/lz4_compress.c"
-              "lib/lz4/lz4_decompress.c"
-              "lib/lz4/lz4defs.h"
-              "lib/lz4/lz4hc_compress.c"
-          )
-          for file in "${files[@]}"; do
-              if [ -e "$file" ]; then
-                  rm "$file"
-              fi
-          done
-          cp -r ../../kernelpatches/zram/lz4/* ./lib/lz4/
-          cp -r ../../kernelpatches/zram/include/linux/* ./include/linux/
-          cp ../../kernelpatches/zram/5.15/lz4_1.10.0.patch ./
+          rm -f lib/lz4/lz4_compress.c
+          rm -f lib/lz4/lz4_decompress.c
+          rm -f lib/lz4/lz4defs.h
+          rm -f lib/lz4/lz4hc_compress.c
+          rm -rf fs/f2fs/lz4armv8
+          cp -r ../../co3kernel/zram/lz4/* ./lib/lz4/
+          cp -r ../../co3kernel/zram/include/linux/* ./include/linux/
+          cp ../../co3kernel/zram/lz4_1.10.0.patch ./
           patch -p1 < lz4_1.10.0.patch || true
 
       - name: Patch kernel by Coccinelle
