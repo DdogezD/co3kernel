@@ -13,8 +13,10 @@
 ## 致谢
 
 - [OnePlusOSS](https://github.com/OnePlusOSS/kernel_manifest)
+  - [oneplus_sm8550](https://github.com/OnePlusOSS/android_kernel_common_oneplus_sm8550)
 - [KernelSU](https://github.com/tiann/KernelSU)
 - [KernelSU Next](https://github.com/KernelSU-Next/KernelSU-Next)
 - [KernelSU Coccinelle](https://github.com/devnoname120/kernelsu-coccinelle)
 - [Action_OnePlus_MKSU_SUSFS](https://github.com/ShirkNeko/Action_OnePlus_MKSU_SUSFS)
+- [AnkoleNeon’s Patches](https://github.com/AnkoleNeon/GKI_KernelSU_SUSFS)
 
