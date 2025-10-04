@@ -26,6 +26,7 @@
 - vmalloc: 支持大块虚拟内存
 - mm: 不为 user/admin 登录而保留内存 (~136m)
 - arm64: clear_page 对齐 16b
+- 小幅 zram 优化
 
 #### 📈 网络栈优化
 - 采用 bbr 收敛方式的 westwood 算法变种
