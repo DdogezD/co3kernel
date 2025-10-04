@@ -17,9 +17,9 @@
   - sched: 禁用 CACHE_HOT_BUDDY
 
 #### 📦 内存优化
-- 忽略 disksize 的值, 强制使用与物理 ram 1:1 大小的 zram
-- LZ4: v1.10.0
-- ZSTD: v1.5.7
+- zram: 忽略 disksize, 使用与物理内存 1:1 的值
+- lz4: v1.10.0
+- zstd: v1.5.7
 - 优化的 mem* (~25%+ faster)
   - memcpy
   - memmove
