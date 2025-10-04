@@ -1,0 +1,27 @@
+Subject: [PATCH] ignore zram disksize and forcing 1:1
+
+---
+ drivers/block/zram/zram_drv.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/block/zram/zram_drv.c b/drivers/block/zram/zram_drv.c
+index 0da494afd62b8..5264948637cf3 100644
+--- a/drivers/block/zram/zram_drv.c
++++ b/drivers/block/zram/zram_drv.c
+@@ -34,6 +34,7 @@
+ #include <linux/debugfs.h>
+ #include <linux/cpuhotplug.h>
+ #include <linux/part_stat.h>
++#include <linux/mm.h>
+ 
+ #include "zram_drv.h"
+ 
+@@ -1725,7 +1726,7 @@ static ssize_t disksize_store(struct device *dev,
+ 	struct zram *zram = dev_to_zram(dev);
+ 	int err;
+ 
+-	disksize = memparse(buf, NULL);
++	disksize = ((u64)totalram_pages() << PAGE_SHIFT);
+ 	if (!disksize)
+ 		return -EINVAL;
+ 
