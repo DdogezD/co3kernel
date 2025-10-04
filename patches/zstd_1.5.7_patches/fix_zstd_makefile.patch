@@ -57,11 +57,13 @@ diff --git a/lib/zstd/Makefile b/lib/zstd/Makefile
 index fc45339fc3a36..440bd0007ae20 100644
 --- a/lib/zstd/Makefile
 +++ b/lib/zstd/Makefile
-@@ -10,14 +10,10 @@
+@@ -10,16 +10,12 @@
  # ################################################################
  obj-$(CONFIG_ZSTD_COMPRESS) += zstd_compress.o
  obj-$(CONFIG_ZSTD_DECOMPRESS) += zstd_decompress.o
 +obj-$(CONFIG_ZSTD_COMMON) += zstd_common.o
+ 
+ ccflags-y += -O3
  
  zstd_compress-y := \
  		zstd_compress_module.o \
