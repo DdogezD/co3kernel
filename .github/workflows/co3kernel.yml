@@ -77,6 +77,7 @@ jobs:
           patch -p1 < 4.patch || true
           patch -p1 < 5.patch || true
           patch -p1 < 6.patch || true
+          patch -p1 < fix_zstd_makefile.patch || true
 
       - name: co3kernel/ upgrade zstd v1.5.7
         run: |
@@ -90,12 +91,11 @@ jobs:
         run: |
           cd kernel_workspace/kernel_platform/common
           patch -p1 < 7.patch || true
-          patch -p1 < 9.patch || true
+          patch -p1 < 8.patch || true
           patch -p1 < 10.patch || true
           patch -p1 < 11.patch || true
           patch -p1 < 12.patch || true
           patch -p1 < default_level.patch || true
-          patch -p1 < fix_zstd_makefile.patch || true
           patch -p1 < zstd_symbol.patch || true
 
       - name: co3kernel/ add kernel patches
