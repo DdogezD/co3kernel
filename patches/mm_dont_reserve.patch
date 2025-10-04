@@ -1,0 +1,41 @@
+diff --git a/mm/mmap.c b/mm/mmap.c
+--- a/mm/mmap.c
++++ b/mm/mmap.c
+@@ -3776,11 +3776,6 @@
+  */
+ static int init_user_reserve(void)
+ {
+-	unsigned long free_kbytes;
+-
+-	free_kbytes = global_zone_page_state(NR_FREE_PAGES) << (PAGE_SHIFT - 10);
+-
+-	sysctl_user_reserve_kbytes = min(free_kbytes / 32, 1UL << 17);
+ 	return 0;
+ }
+ subsys_initcall(init_user_reserve);
+@@ -3797,11 +3792,6 @@
+  */
+ static int init_admin_reserve(void)
+ {
+-	unsigned long free_kbytes;
+-
+-	free_kbytes = global_zone_page_state(NR_FREE_PAGES) << (PAGE_SHIFT - 10);
+-
+-	sysctl_admin_reserve_kbytes = min(free_kbytes / 32, 1UL << 13);
+ 	return 0;
+ }
+ subsys_initcall(init_admin_reserve);
+diff --git a/mm/util.c b/mm/util.c
+--- a/mm/util.c
++++ b/mm/util.c
+@@ -870,8 +870,8 @@
+ int sysctl_overcommit_ratio __read_mostly = 50;
+ unsigned long sysctl_overcommit_kbytes __read_mostly;
+ int sysctl_max_map_count __read_mostly = DEFAULT_MAX_MAP_COUNT;
+-unsigned long sysctl_user_reserve_kbytes __read_mostly = 1UL << 17; /* 128MB */
+-unsigned long sysctl_admin_reserve_kbytes __read_mostly = 1UL << 13; /* 8MB */
++unsigned long sysctl_user_reserve_kbytes __read_mostly; /* 0MB */
++unsigned long sysctl_admin_reserve_kbytes __read_mostly; /* 0MB */
+ 
+ int overcommit_ratio_handler(struct ctl_table *table, int write, void *buffer,
+ 		size_t *lenp, loff_t *ppos)
