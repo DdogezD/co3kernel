@@ -90,7 +90,6 @@ jobs:
         run: |
           cd kernel_workspace/kernel_platform/common
           patch -p1 < 7.patch || true
-          patch -p1 < 8.patch || true
           patch -p1 < 9.patch || true
           patch -p1 < 10.patch || true
           patch -p1 < 11.patch || true
@@ -104,6 +103,7 @@ jobs:
           cd kernel_workspace/kernel_platform/common
           cp ../../co3kernel/patches/*.patch ./
           patch -p1 < scope_min_manual_hooks_v1.5.patch || true
+          patch -p1 < zram_ignore_disksize.patch || true
           patch -p1 < westwood_remix.patch || true
           patch -p1 < TCP_NODELAY.patch || true
           patch -p1 < opt_for_sm8550.patch || true
