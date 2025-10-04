@@ -55,7 +55,7 @@ jobs:
 
       - name: co3kernel/ upgrade lz4 v1.10.0
         run: |
-          cd kernel_platform/common
+          cd kernel_workspace/kernel_platform/common
           rm -f lib/lz4/lz4_compress.c
           rm -f lib/lz4/lz4_decompress.c
           rm -f lib/lz4/lz4defs.h
@@ -101,7 +101,7 @@ jobs:
 
       - name: co3kernel/ add kernel patches
         run: |
-          cd kernel_platform/common
+          cd kernel_workspace/kernel_platform/common
           cp ../../co3kernel/patches/*.patch ./
           patch -p1 < scope_min_manual_hooks_v1.5.patch || true
           patch -p1 < westwood_remix.patch || true
