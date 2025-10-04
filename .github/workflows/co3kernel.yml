@@ -55,8 +55,6 @@ jobs:
 
       - name: co3kernel/ upgrade lz4 v1.10.0
         run: |
-          cd kernel_workspace
-          git clone https://github.com/DdogezD/co3kernel.git
           cd kernel_platform/common
           rm -f lib/lz4/lz4_compress.c
           rm -f lib/lz4/lz4_decompress.c
