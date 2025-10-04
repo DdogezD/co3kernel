@@ -168,7 +168,7 @@ jobs:
         run: |
           rm -rf kernel_workspace/co3kernel
 
-      - name: Add KernelSU Next v1.10.0
+      - name: Add KernelSU Next v1.1.0
         run: |
           cd kernel_workspace/kernel_platform
           curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -s v1.1.0
