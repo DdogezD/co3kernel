@@ -62,7 +62,7 @@ jobs:
           rm -f lib/lz4/lz4hc_compress.c
           mv fs/f2fs/lz4armv8 lib/lz4/
           cp -r ../../co3kernel/patches/lz4_1.10.0_patches/lz4/* ./lib/lz4/
-          cp -r ../../co3kernel/patches/lz4_1.10.0_patchesinclude/linux/* ./include/linux/
+          cp -r ../../co3kernel/patches/lz4_1.10.0_patches/include/linux/* ./include/linux/
           cp ../../co3kernel/patches/lz4_1.10.0_patches/lz4_1.10.0.patch ./
           patch -p1 < lz4_1.10.0.patch || true
 
