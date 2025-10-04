@@ -53,7 +53,7 @@ jobs:
           cd kernel_workspace
           git clone https://github.com/DdogezD/co3kernel.git
 
-      - name: co3kernel: upgrade lz4 v1.10.0
+      - name: co3kernel/ upgrade lz4 v1.10.0
         run: |
           cd kernel_workspace
           git clone https://github.com/DdogezD/co3kernel.git
@@ -68,7 +68,7 @@ jobs:
           cp ../../co3kernel/patches/lz4_1.10.0_patches/lz4_1.10.0.patch ./
           patch -p1 < lz4_1.10.0.patch || true
 
-      - name: co3kernel: sync to standard zstd kernel API
+      - name: co3kernel/ sync to standard zstd kernel API
         run: |
           cd kernel_workspace/kernel_platform/common
           cp ../../co3kernel/patches/zstd_1.5.7_patches/*.patch ./
@@ -80,7 +80,7 @@ jobs:
           patch -p1 < 5.patch || true
           patch -p1 < 6.patch || true
 
-      - name: co3kernel: upgrade zstd v1.5.7
+      - name: co3kernel/ upgrade zstd v1.5.7
         run: |
           cd kernel_workspace
           git clone --branch v1.5.7 https://github.com/facebook/zstd.git
@@ -88,7 +88,7 @@ jobs:
           make libzstd
           make import LINUX=$GITHUB_WORKSPACE/kernel_workspace/kernel_platform/common
 
-      - name: co3kernel: zstd adapt for GKI
+      - name: co3kernel/ zstd adapt for GKI
         run: |
           cd kernel_workspace/kernel_platform/common
           patch -p1 < 7.patch || true
@@ -101,7 +101,7 @@ jobs:
           patch -p1 < fix_zstd_makefile.patch || true
           patch -p1 < zstd_symbol.patch || true
 
-      - name: co3kernel: add kernel patches
+      - name: co3kernel/ add kernel patches
         run: |
           cd kernel_platform/common
           cp ../../co3kernel/patches/*.patch ./
