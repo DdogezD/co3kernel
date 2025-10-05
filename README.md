@@ -1,13 +1,25 @@
-# CO³Kernel 
-*Custom OnePlus Open Optimized Kernel*
+<div align = center>
+<h1>CO³Kernel</h1>
 
-这是为 Hedwig (OnePlus Open) 编译的内核, 基于 [OnePlusOSS 源码](https://github.com/OnePlusOSS/android_kernel_common_oneplus_sm8550/tree/oneplus/sm8550_v_15.0.0_oneplus_open), 提升设备综合表现。
+***C**ustom **O**nePlus **O**pen **O**ptimized **K**ernel*
+
+这是为 Hedwig/Xueying (OnePlus Open) 编译的客制化内核
+<h1></h1>
+</div>
+
+#### 🚀 同步 Google ACK 上游
+- 同步 android13-5.15-lts
 
 #### 👾 内核级 root impl. 
 - KernelSU Next: v1.1.0 (Manual Hooks)
 - KernelSU Scope Minimized Hooks: v1.5
-- Mountify 支持
-  - tmpfs: 支持拓展属性
+- Mountify 支持: tmpfs: 支持拓展属性
+
+#### 📀 存储优化
+- 三星 S-HID,HID 驱动 v1.1
+- 三星 FBO 驱动 (UFS 4.1)
+- fs: 减少缓存以发挥大内存的作用
+- fs: 对齐 8b
 
 #### ⚡ CPU 优化
 - cpuidle: 去除 menu 的 iowait
@@ -29,8 +41,8 @@
 - 小幅 zram 优化
 
 #### 📈 网络栈优化
-- 采用 bbr 收敛方式的 westwood 算法变种
-- 将 westwood 变种作为默认的 tcp 拥塞算法
+- 引入 "westsood-sub", 采用 bbr 收敛方式的 westwood-plus 算法变种
+- 将 westwood-sub 作为默认的 tcp 拥塞算法
 - 将 fq_codel 作为默认的数据包队列调度器
 - 使用 TCP_NODELAY
 
@@ -73,12 +85,13 @@
 - selinux: 避免动态内存分配
 - sched idle loop 中省略多余的获取内存屏障
 - ttwu 流程中省略多余的获取内存屏障
-- fs: 减少缓存以发挥大内存的作用
-- fs: 对齐 8b
 
 ## 🍀 特别感谢
+
+[OnePlus OSS/sm8550](https://github.com/OnePlusOSS/android_kernel_common_oneplus_sm8550/tree/oneplus/sm8550_v_15.0.0_oneplus_open)
+
 此内核合并了来自 **Sultan, arter97, Pzqqt, brokestar233, ztc1997, hfdem** 等内核开发者的提交。
 
 感谢 **Pzqqt, brokestar233, Cloud_Yun** 提供了开发指导。
 
-排名不分先后。
+内核开发者们的排名不分先后。
