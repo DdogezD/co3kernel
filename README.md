@@ -41,7 +41,7 @@
 - 小幅 zram 优化
 
 #### 📈 网络栈优化
-- 引入 "westsood-sub", 采用 bbr 收敛方式的 westwood-plus 算法变种
+- 引入"westsood-sub": 采用 bbr 收敛方式的 westwood-plus 算法变种
 - 将 westwood-sub 作为默认的 tcp 拥塞算法
 - 将 fq_codel 作为默认的数据包队列调度器
 - 使用 TCP_NODELAY
@@ -74,7 +74,6 @@
   - 对 freezer_trap 作 LTO noinline 处理
 
 #### 🔨 小幅调整
-- 启用 LazyRCU
 - 通过禁用所有 I/O 调速器, 将 I/O 调速器配置为 "none"
 - 额外的省电工作队列
 - RCU: 修复省电工作队列造成的性能损失
