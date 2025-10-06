@@ -16,7 +16,7 @@
 - Mountify 支持: tmpfs: 支持拓展属性
 
 #### 📀 存储优化
-- 三星 S-HID,HID 驱动 v1.1
+- 三星 S-HID, HID 驱动 v1.1
 - 三星 FBO 驱动 (UFS 4.1)
 - fs: 减少缓存以发挥大内存的作用
 - fs: 对齐 8b
@@ -77,7 +77,6 @@
 - 通过禁用所有 I/O 调速器, 将 I/O 调速器配置为 "none"
 - 额外的省电工作队列
 - RCU: 修复省电工作队列造成的性能损失
-- 禁用 IKHEADERS
 - 更快的整数平方根算法
 - arm64: 默认使用 LSE 原子指令集
 - 相对宽容的 alarmtimer, 避免阻止 suspend
