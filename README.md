@@ -52,11 +52,11 @@
   - 对 freezer_trap 作 LTO noinline 处理
 
 #### 🔨 小幅调整
-- 使用 TCP_NODELAY
-- 通过禁用所有 I/O 调速器, 将 I/O 调速器配置为 "none"
+- TCP 链接禁用 Nagle 算法以降低延迟
+- 禁用所有 I/O 调度器
 - 额外的省电工作队列配置
 - RCU: 修复省电工作队列造成的性能损失
-- 更快的整数平方根算法
+- arm64: 更快的整数平方根算法
 - arm64: 默认使用 LSE 原子指令集
 - 相对宽容的 alarmtimer, 避免阻止 suspend
 - selinux: 避免动态内存分配
@@ -65,7 +65,7 @@
 
 ## 🍀 特别感谢
 
-[OnePlus OSS/sm8550](https://github.com/OnePlusOSS/android_kernel_common_oneplus_sm8550/tree/oneplus/sm8550_v_15.0.0_oneplus_open)
+基于 [OnePlus OSS/common_sm8550/oneplus_open](https://github.com/OnePlusOSS/android_kernel_common_oneplus_sm8550/tree/oneplus/sm8550_v_15.0.0_oneplus_open)
 
 此内核合并了来自 **Sultan, arter97, Pzqqt, brokestar233, ztc1997, hfdem** 等内核开发者的提交。
 
