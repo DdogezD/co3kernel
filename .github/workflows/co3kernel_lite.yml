@@ -89,7 +89,7 @@ jobs:
           patch -p1 < cpuidle_dont_rtn.patch || true
           patch -p1 < cpuidle_rej_entry.patch || true
           patch -p1 < mm_dont_reserve.patch || true
-          patch -p1 < disable_CACHE_HOT_BUDDY.patch || true
+          #patch -p1 < disable_CACHE_HOT_BUDDY.patch || true
           patch -p1 < less_migra_cost.patch || true
           patch -p1 < fair_pelt_16ms.patch || true
           patch -p1 < fs_reduce_cache.patch || true
