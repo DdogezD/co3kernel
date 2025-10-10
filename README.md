@@ -7,6 +7,10 @@
 <h1></h1>
 </div>
 
+#### 🚀 同步 Google ACK 上游
+- Merge "android13-5.15-lts"
+- Linux version: 5.15.194
+
 #### 👾 内核级 root impl. 
 - KernelSU Next: v1.1.0 (Manual Hooks)
 - KernelSU Scope Minimized Hooks: v1.5
