@@ -1,11 +1,6 @@
 name: co3kernel_build_lite
 on:
   workflow_dispatch:
-    inputs:
-      KERNEL_NAME:
-        description: "自定义 Linux version 字符串"
-        required: true
-        default: '-android13-8-0-01144-g8e1bc9d233a1'
 
 jobs:
   build:
@@ -155,10 +150,9 @@ jobs:
           sed -i '/^[[:space:]]*depends on[[:space:]]\+ARC$/d' ./common/init/Kconfig
           sed -i 's/check_defconfig//' ./common/build.config.gki
 
-      - name: Spoof Linux version
+      - name: Clean Linux version
         run: |
           cd kernel_workspace/kernel_platform
-          sed -i '$s|echo "\$res"|echo "\${{ github.event.inputs.KERNEL_NAME }}"|' ./common/scripts/setlocalversion
           sed -i "/stable_scmversion_cmd/s/-maybe-dirty//g" ./build/kernel/kleaf/impl/stamp.bzl
 
       - name: Build kernel
